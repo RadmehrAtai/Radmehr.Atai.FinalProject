@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Glasses index{% endblock %}
+
+{% block body %}
+    <h1>Glasses index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>FrameMaterial</th>
+                <th>FrameForm</th>
+                <th>FrameColor</th>
+                <th>Brand</th>
+                <th>LenzMaterial</th>
+                <th>FaceForm</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for glass in glasses %}
+            <tr>
+                <td>{{ glass.id }}</td>
+                <td>{{ glass.frameMaterial }}</td>
+                <td>{{ glass.frameForm }}</td>
+                <td>{{ glass.frameColor }}</td>
+                <td>{{ glass.brand }}</td>
+                <td>{{ glass.lenzMaterial }}</td>
+                <td>{{ glass.faceForm }}</td>
+                <td>{{ glass.price }}</td>
+                <td>{{ glass.description }}</td>
+                <td>
+                    <a href="{{ path('app_glasses_show', {'id': glass.id}) }}">show</a>
+                    <a href="{{ path('app_glasses_edit', {'id': glass.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_glasses_new') }}">Create new</a>
+{% endblock %}

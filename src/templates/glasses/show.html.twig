@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Glasses{% endblock %}
+
+{% block body %}
+    <h1>Glasses</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ glass.id }}</td>
+            </tr>
+            <tr>
+                <th>FrameMaterial</th>
+                <td>{{ glass.frameMaterial }}</td>
+            </tr>
+            <tr>
+                <th>FrameForm</th>
+                <td>{{ glass.frameForm }}</td>
+            </tr>
+            <tr>
+                <th>FrameColor</th>
+                <td>{{ glass.frameColor }}</td>
+            </tr>
+            <tr>
+                <th>Brand</th>
+                <td>{{ glass.brand }}</td>
+            </tr>
+            <tr>
+                <th>LenzMaterial</th>
+                <td>{{ glass.lenzMaterial }}</td>
+            </tr>
+            <tr>
+                <th>FaceForm</th>
+                <td>{{ glass.faceForm }}</td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td>{{ glass.price }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ glass.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_glasses_index') }}">back to list</a>
+
+    <a href="{{ path('app_glasses_edit', {'id': glass.id}) }}">edit</a>
+
+    {{ include('glasses/_delete_form.html.twig') }}
+{% endblock %}

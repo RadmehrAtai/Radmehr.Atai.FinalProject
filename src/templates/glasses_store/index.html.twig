@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}GlassesStore index{% endblock %}
+
+{% block body %}
+    <h1>GlassesStore index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for glasses_store in glasses_stores %}
+            <tr>
+                <td>{{ glasses_store.id }}</td>
+                <td>{{ glasses_store.name }}</td>
+                <td>{{ glasses_store.address }}</td>
+                <td>{{ glasses_store.phone }}</td>
+                <td>
+                    <a href="{{ path('app_glasses_store_show', {'id': glasses_store.id}) }}">show</a>
+                    <a href="{{ path('app_glasses_store_edit', {'id': glasses_store.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_glasses_store_new') }}">Create new</a>
+{% endblock %}
