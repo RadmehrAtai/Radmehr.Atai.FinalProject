@@ -2,14 +2,21 @@
 
 namespace App\Entity;
 
+use App\Model\TimeInterface;
+use App\Model\TimeTrait;
+use App\Model\UserInterface;
+use App\Model\UserTrait;
 use App\Repository\GlassesStoreRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: GlassesStoreRepository::class)]
-class GlassesStore
+class GlassesStore implements UserInterface, TimeInterface
 {
+    use TimeTrait;
+    use UserTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column()]
@@ -117,5 +124,25 @@ class GlassesStore
         $this->phone = $phone;
 
         return $this;
+    }
+
+    public function getCreatedBy()
+    {
+        // TODO: Implement getCreatedBy() method.
+    }
+
+    public function setCreatedBy($user)
+    {
+        // TODO: Implement setCreatedBy() method.
+    }
+
+    public function getUpdatedBy()
+    {
+        // TODO: Implement getUpdatedBy() method.
+    }
+
+    public function setUpdatedBy($user)
+    {
+        // TODO: Implement setUpdatedBy() method.
     }
 }

@@ -2,13 +2,20 @@
 
 namespace App\Entity;
 
+use App\Model\TimeInterface;
+use App\Model\TimeTrait;
+use App\Model\UserInterface;
+use App\Model\UserTrait;
 use App\Repository\GlassesRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: GlassesRepository::class)]
-class Glasses
+class Glasses implements UserInterface, TimeInterface
 {
+    use TimeTrait;
+    use UserTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column()]
@@ -153,5 +160,25 @@ class Glasses
         $this->description = $description;
 
         return $this;
+    }
+
+    public function getCreatedBy()
+    {
+        // TODO: Implement getCreatedBy() method.
+    }
+
+    public function setCreatedBy($user)
+    {
+        // TODO: Implement setCreatedBy() method.
+    }
+
+    public function getUpdatedBy()
+    {
+        // TODO: Implement getUpdatedBy() method.
+    }
+
+    public function setUpdatedBy($user)
+    {
+        // TODO: Implement setUpdatedBy() method.
     }
 }

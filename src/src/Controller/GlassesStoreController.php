@@ -27,6 +27,7 @@ class GlassesStoreController extends AbstractController
         $glassesStore = new GlassesStore();
         $form = $this->createForm(GlassesStoreType::class, $glassesStore);
         $form->handleRequest($request);
+        $this->denyAccessUnlessGranted('new', $glassesStore);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $glassesStoreRepository->add($glassesStore, true);
@@ -53,6 +54,7 @@ class GlassesStoreController extends AbstractController
     {
         $form = $this->createForm(GlassesStoreType::class, $glassesStore);
         $form->handleRequest($request);
+        $this->denyAccessUnlessGranted('edit', $glassesStore);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $glassesStoreRepository->add($glassesStore, true);
@@ -69,6 +71,7 @@ class GlassesStoreController extends AbstractController
     #[Route('/{id}', name: 'app_glasses_store_delete', methods: ['POST'])]
     public function delete(Request $request, GlassesStore $glassesStore, GlassesStoreRepository $glassesStoreRepository): Response
     {
+        $this->denyAccessUnlessGranted('delete', $glassesStore);
         if ($this->isCsrfTokenValid('delete'.$glassesStore->getId(), $request->request->get('_token'))) {
             $glassesStoreRepository->remove($glassesStore, true);
         }
