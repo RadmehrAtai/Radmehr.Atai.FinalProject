@@ -16,11 +16,18 @@ doctrine:
                 prefix: 'App\Entity'
                 alias: App
 
-when@test:
-    doctrine:
-        dbal:
-            # "TEST_TOKEN" is typically set by ParaTest
-            dbname_suffix: '_test%env(default::TEST_TOKEN)%'
+            translatable:
+                type: annotation
+                is_bundle: false
+                prefix: Gedmo\Translatable\Entity
+                dir: "%kernel.project_dir%/vendor/gedmo/doctrine-extensions/src/Translatable/Entity"
+                alias: GedmoTranslatable
+
+#when@test:
+#    doctrine:
+#        dbal:
+#            # "TEST_TOKEN" is typically set by ParaTest
+#            dbname_suffix: '_test%env(default::TEST_TOKEN)%'
 
 when@prod:
     doctrine:
@@ -40,3 +47,11 @@ when@prod:
                     adapter: cache.app
                 doctrine.system_cache_pool:
                     adapter: cache.system
+
+    orm:
+        entity_managers:
+            default:
+                filters:
+                    softdeleteable:
+                        class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
+                        enabled: true

@@ -8,13 +8,18 @@ use App\Model\UserInterface;
 use App\Model\UserTrait;
 use App\Repository\GlassesRepository;
 use Doctrine\DBAL\Types\Types;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
+use Gedmo\Translatable\Translatable;
 
 #[ORM\Entity(repositoryClass: GlassesRepository::class)]
-class Glasses implements UserInterface, TimeInterface
+#[Gedmo\SoftDeleteable(fieldName: 'deletedAt', timeAware: false, hardDelete: true)]
+class Glasses implements UserInterface, TimeInterface, Translatable
 {
     use TimeTrait;
     use UserTrait;
+    use SoftDeleteableEntity;
 
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -22,21 +27,27 @@ class Glasses implements UserInterface, TimeInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Gedmo\Translatable]
     private ?string $frameMaterial = null;
 
     #[ORM\Column(length: 255)]
+    #[Gedmo\Translatable]
     private ?string $frameForm = null;
 
     #[ORM\Column(length: 255)]
+    #[Gedmo\Translatable]
     private ?string $frameColor = null;
 
     #[ORM\Column(length: 255)]
+    #[Gedmo\Translatable]
     private ?string $brand = null;
 
     #[ORM\Column(length: 255)]
+    #[Gedmo\Translatable]
     private ?string $lenzMaterial = null;
 
     #[ORM\Column(length: 255)]
+    #[Gedmo\Translatable]
     private ?string $faceForm = null;
 
     #[ORM\Column]
@@ -47,7 +58,14 @@ class Glasses implements UserInterface, TimeInterface
     private ?GlassesStore $glassesStore = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Gedmo\Translatable]
     private ?string $description = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $model = null;
+
+    #[Gedmo\Locale]
+    private $locale;
 
     public function getId(): ?int
     {
@@ -180,5 +198,22 @@ class Glasses implements UserInterface, TimeInterface
     public function setUpdatedBy($user)
     {
         // TODO: Implement setUpdatedBy() method.
+    }
+
+    public function getModel(): ?string
+    {
+        return $this->model;
+    }
+
+    public function setModel(string $model): self
+    {
+        $this->model = $model;
+
+        return $this;
+    }
+
+    public function setTranslatableLocale($locale)
+    {
+        $this->locale = $locale;
     }
 }

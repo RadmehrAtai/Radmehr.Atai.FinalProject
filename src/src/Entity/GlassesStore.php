@@ -9,10 +9,12 @@ use App\Model\UserTrait;
 use App\Repository\GlassesStoreRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Translatable\Translatable;
 
 #[ORM\Entity(repositoryClass: GlassesStoreRepository::class)]
-class GlassesStore implements UserInterface, TimeInterface
+class GlassesStore implements UserInterface, TimeInterface, Translatable
 {
     use TimeTrait;
     use UserTrait;
@@ -30,13 +32,18 @@ class GlassesStore implements UserInterface, TimeInterface
     private Collection $glasses;
 
     #[ORM\Column(length: 255)]
+    #[Gedmo\Translatable]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    #[Gedmo\Translatable]
     private ?string $address = null;
 
     #[ORM\Column(length: 255)]
     private ?string $phone = null;
+
+    #[Gedmo\Locale]
+    private $locale;
 
     public function __construct()
     {
@@ -144,5 +151,10 @@ class GlassesStore implements UserInterface, TimeInterface
     public function setUpdatedBy($user)
     {
         // TODO: Implement setUpdatedBy() method.
+    }
+
+    public function setTranslatableLocale($locale)
+    {
+        $this->locale = $locale;
     }
 }
