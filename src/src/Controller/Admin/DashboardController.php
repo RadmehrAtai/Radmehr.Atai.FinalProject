@@ -2,6 +2,17 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Attraction;
+use App\Entity\Event;
+use App\Entity\Form;
+use App\Entity\Glasses;
+use App\Entity\GlassesStore;
+use App\Entity\Hotel;
+use App\Entity\Location;
+use App\Entity\Message;
+use App\Entity\Order;
+use App\Entity\Room;
+use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -34,12 +45,28 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Html');
+            ->setTitle('Glasses Market Place');
     }
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+        return [
+            MenuItem::linkToDashboard('Dashboard', 'fa fa-home'),
+
+            MenuItem::section('User'),
+            MenuItem::linkToCrud('Users', 'fa fa-list', User::class),
+
+            MenuItem::section('Product'),
+            MenuItem::linkToCrud('Glasses', 'fa fa-list', Glasses::class),
+
+            MenuItem::section('Store'),
+            MenuItem::linkToCrud('GlassesStores', 'fa fa-list', GlassesStore::class),
+
+            MenuItem::section('Message'),
+            MenuItem::linkToCrud('Messages', 'fa fa-list', Message::class),
+
+            MenuItem::section('Order'),
+            MenuItem::linkToCrud('Orders', 'fa fa-list', Order::class),
+        ];
     }
 }

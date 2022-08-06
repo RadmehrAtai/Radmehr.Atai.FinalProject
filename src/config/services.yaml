@@ -36,6 +36,11 @@ services:
             - name: 'doctrine.event_subscriber'
 
 
+    App\Subscriber\CostSubscriber:
+        tags:
+            - name: 'doctrine.event_subscriber'
+
+
     Gedmo\Translatable\TranslatableListener:
         tags:
             - { name: doctrine.event_subscriber, connection: default }
