@@ -15,7 +15,6 @@ class GlassesStoreType extends AbstractType
             ->add('name')
             ->add('address')
             ->add('phone')
-            ->add('owner')
         ;
     }
 

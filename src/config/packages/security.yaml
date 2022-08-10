@@ -33,9 +33,9 @@ security:
   access_control:
     - { path: ^/admin, roles: ROLE_ADMIN }
     - { path: ^/profile, roles: ROLE_USER }
-    - { path: edit$, roles: ROLE_USER }
-    - { path: new$, roles: ROLE_USER }
-    - { path: delete$, roles: ROLE_USER }
+    - { path: edit$, roles: [ROLE_USER, ROLE_SELLER] }
+    - { path: new$, roles: [ROLE_USER, ROLE_SELLER] }
+    - { path: delete$, roles: [ROLE_USER, ROLE_SELLER] }
 
 when@test:
   security:

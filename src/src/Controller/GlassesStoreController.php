@@ -3,16 +3,32 @@
 namespace App\Controller;
 
 use App\Entity\GlassesStore;
+use App\Entity\User;
 use App\Form\GlassesStoreType;
 use App\Repository\GlassesStoreRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 #[Route('/stores')]
 class GlassesStoreController extends AbstractController
 {
+    /** @var  TokenStorageInterface */
+    private $tokenStorage;
+
+    /**
+     * @param TokenStorageInterface  $storage
+     */
+    public function __construct(
+        TokenStorageInterface $storage,
+    )
+    {
+        $this->tokenStorage = $storage;
+    }
+
     #[Route('/', name: 'app_glasses_store_index', methods: ['GET'])]
     public function index(GlassesStoreRepository $glassesStoreRepository): Response
     {
@@ -28,6 +44,13 @@ class GlassesStoreController extends AbstractController
         $form = $this->createForm(GlassesStoreType::class, $glassesStore);
         $form->handleRequest($request);
         $this->denyAccessUnlessGranted('new', $glassesStore);
+
+        $token = $this->tokenStorage->getToken();
+        if ($token instanceof TokenInterface) {
+            /** @var User $user */
+            $user = $token->getUser();
+            $glassesStore->setOwner($user);
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
             $glassesStoreRepository->add($glassesStore, true);

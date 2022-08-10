@@ -6,6 +6,7 @@ use App\Entity\GlassesStore;
 use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
+use Symfony\Component\Security\Core\Security;
 
 
 class OwnerVoter extends Voter
@@ -15,6 +16,13 @@ class OwnerVoter extends Voter
     const NEW = 'new';
     const VIEW = 'view';
 
+    private $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
+
     protected function supports(string $attribute, mixed $subject): bool
     {
         // if the attribute isn't one we support, return false
@@ -22,7 +30,7 @@ class OwnerVoter extends Voter
             return false;
         }
 
-        // only vote on `Hotel` objects
+        // only vote on `GlassesStore` objects
         if (!$subject instanceof GlassesStore) {
             return false;
         }
@@ -37,7 +45,7 @@ class OwnerVoter extends Voter
             return false;
         }
 
-        /** @var GlassesStore $hotel */
+        /** @var GlassesStore $glassesStore */
         $glassesStore = $subject;
 
         switch ($attribute) {
@@ -66,7 +74,7 @@ class OwnerVoter extends Voter
 
     private function canNew(GlassesStore $glassesStore, User $user): bool
     {
-        return !$user->getGlassesStores()->isEmpty();
+        return $this->security->isGranted('ROLE_SELLER');
     }
 
     private function canDelete(GlassesStore $glassesStore, User $user): bool

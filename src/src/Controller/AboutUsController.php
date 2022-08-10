@@ -12,8 +12,6 @@ class AboutUsController extends AbstractController
     #[Route('/', name: 'app_about_index', methods: ['GET'])]
     public function index(): Response
     {
-        return $this->render('about_us/index.html.twig', [
-            'controller_name' => 'AboutUsController',
-        ]);
+        return $this->render('about_us/index.html.twig');
     }
 }

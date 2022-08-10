@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Glasses;
 use App\Form\GlassesType;
 use App\Repository\GlassesRepository;
+use App\Search\SearchService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -74,5 +75,17 @@ class GlassesController extends AbstractController
         }
 
         return $this->redirectToRoute('app_glasses_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/search', name: 'app_glasses_search', methods: ['GET'])]
+    public function search(Request $request, SearchService $glassesSearch): Response
+    {
+        $q = $request->query->get('query');
+        $glasses = $glassesSearch->search($q);
+
+        return $this->render('glasses/search.html.twig', [
+            'query' => $q,
+            'glasses' => $glasses,
+        ]);
     }
 }
