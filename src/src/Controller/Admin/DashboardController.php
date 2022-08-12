@@ -2,16 +2,10 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Attraction;
-use App\Entity\Event;
-use App\Entity\Form;
 use App\Entity\Glasses;
 use App\Entity\GlassesStore;
-use App\Entity\Hotel;
-use App\Entity\Location;
 use App\Entity\Message;
 use App\Entity\Order;
-use App\Entity\Room;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;

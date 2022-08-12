@@ -82,8 +82,8 @@
                 <td>{{ glasses_store.address }}</td>
                 <td>{{ glasses_store.phone }}</td>
                 <td>
-                    <a href="{{ path('app_glasses_store_show', {'id': glasses_store.id}) }}">show</a>
-                    <a href="{{ path('app_glasses_store_edit', {'id': glasses_store.id}) }}">edit</a>
+                    <a class="btn btn-primary" href="{{ path('app_glasses_store_show', {'id': glasses_store.id}) }}">show</a>
+                    <a class="btn btn-warning" href="{{ path('app_glasses_store_edit', {'id': glasses_store.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}

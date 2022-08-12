@@ -41,6 +41,11 @@ services:
             - name: 'doctrine.event_subscriber'
 
 
+    App\Subscriber\StatusSubscriber:
+        tags:
+            - name: 'doctrine.event_subscriber'
+
+
     Gedmo\Translatable\TranslatableListener:
         tags:
             - { name: doctrine.event_subscriber, connection: default }

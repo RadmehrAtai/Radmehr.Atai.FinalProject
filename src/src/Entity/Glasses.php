@@ -69,7 +69,7 @@ class Glasses implements UserInterface, TimeInterface, Translatable
     #[Gedmo\Locale]
     private $locale;
 
-    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Order::class)]
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Order::class, orphanRemoval: true)]
     private Collection $orders;
 
     public function __construct()

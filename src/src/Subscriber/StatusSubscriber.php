@@ -9,7 +9,7 @@ use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 
 
-class CostSubscriber implements EventSubscriber
+class StatusSubscriber implements EventSubscriber
 {
     public function getSubscribedEvents(): array
     {
@@ -26,14 +26,6 @@ class CostSubscriber implements EventSubscriber
             return;
         }
 
-        $total = 0;
-        $products = $entity->getProducts();
-
-        /** @var Glasses $product */
-        foreach ($products as $product) {
-            $total = $product->getPrice() + $total;
-        }
-
-        $entity->setTotalCost($total);
+        $entity->setStatus("Registered");
     }
 }

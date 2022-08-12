@@ -50,6 +50,11 @@ class GlassesStore implements UserInterface, TimeInterface, Translatable
         $this->glasses = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        return "{$this->name}";
+    }
+
     public function getId(): ?int
     {
         return $this->id;

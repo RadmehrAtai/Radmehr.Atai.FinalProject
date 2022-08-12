@@ -7,10 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 trait UserTrait
 {
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $createdUser;
+    private $createdBy;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $updatedUser;
+    private $updatedBy;
 
     /**
      * @return String
