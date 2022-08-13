@@ -51,7 +51,7 @@
     <div class="m-5">
         <div class="input-group m-5">
             <form class="form-inline" method="get" action="{{ path('app_glasses_search') }}">
-                <input class="form-control mr-sm-2" name="query" type="text" placeholder="Search..."
+                <input class="form-control mr-sm-2" name="query" type="text" placeholder="Search By Brand or Model"
                        aria-label="Search">
                 <input class="btn btn-outline-success my-2 my-sm-0" value="Search" type="submit">
             </form>
@@ -96,7 +96,7 @@
             </tr>
             <tr>
                 <th>Price</th>
-                <td>{{ glass.price }}</td>
+                <td>{{ glass.price|format_currency('USD') }}</td>
             </tr>
             <tr>
                 <th>Description</th>
@@ -106,16 +106,17 @@
     </table>
 
     <a class="btn btn-primary" href="{{ path('app_glasses_index') }}">back to list</a>
-
-    <a class="btn btn-warning" href="{{ path('app_glasses_edit', {'id': glass.id}) }}">edit</a>
-
-    {{ include('glasses/_delete_form.html.twig') }}
+    {% if is_granted("ROLE_SELLER") %}
+        <a class="btn btn-warning" href="{{ path('app_glasses_edit', {'id': glass.id}) }}">edit</a>
+    {% endif %}
+    {% if is_granted("ROLE_SELLER") %}
+        {{ include('glasses/_delete_form.html.twig') }}
+    {% endif %}
 
     <footer class="text-center text-lg-start bg-light text-muted">
 
         <section class="border-bottom">
         </section>
-
         <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
             © 2022 Copyright My Glasses
         </div>

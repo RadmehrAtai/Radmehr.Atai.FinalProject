@@ -10,11 +10,12 @@ use App\Repository\GlassesStoreRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Translatable\Translatable;
 
 #[ORM\Entity(repositoryClass: GlassesStoreRepository::class)]
-class GlassesStore implements UserInterface, TimeInterface, Translatable
+class GlassesStore implements TimeInterface, Translatable, UserInterface
 {
     use TimeTrait;
     use UserTrait;
@@ -31,15 +32,18 @@ class GlassesStore implements UserInterface, TimeInterface, Translatable
     #[ORM\OneToMany(mappedBy: 'glassesStore', targetEntity: Glasses::class, orphanRemoval: true)]
     private Collection $glasses;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255), Assert\Regex(pattern: "/^[a-zA-Z]+$/"),
+        Assert\NotBlank(message: 'Please enter the name.')]
     #[Gedmo\Translatable]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255), Assert\Regex(pattern:"/^[a-zA-Z0-9|\s\-]+$/"),
+        Assert\NotBlank(message: 'Please enter the address.')]
     #[Gedmo\Translatable]
     private ?string $address = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255), Assert\Regex(pattern:"/^[\d|\s]+$/"),
+        Assert\NotBlank(message: 'Please enter the phone number.')]
     private ?string $phone = null;
 
     #[Gedmo\Locale]
@@ -136,26 +140,6 @@ class GlassesStore implements UserInterface, TimeInterface, Translatable
         $this->phone = $phone;
 
         return $this;
-    }
-
-    public function getCreatedBy()
-    {
-        // TODO: Implement getCreatedBy() method.
-    }
-
-    public function setCreatedBy($user)
-    {
-        // TODO: Implement setCreatedBy() method.
-    }
-
-    public function getUpdatedBy()
-    {
-        // TODO: Implement getUpdatedBy() method.
-    }
-
-    public function setUpdatedBy($user)
-    {
-        // TODO: Implement setUpdatedBy() method.
     }
 
     public function setTranslatableLocale($locale)

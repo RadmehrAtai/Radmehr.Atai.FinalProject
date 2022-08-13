@@ -11,6 +11,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Translatable\Translatable;
@@ -28,42 +29,48 @@ class Glasses implements UserInterface, TimeInterface, Translatable
     #[ORM\Column()]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255), Assert\Regex(pattern: "/^[a-zA-Z]+$/"),
+        Assert\NotBlank(message: 'Please enter the frame material.')]
     #[Gedmo\Translatable]
     private ?string $frameMaterial = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255), Assert\Regex(pattern: "/^[a-zA-Z]+$/"),
+        Assert\NotBlank(message: 'Please enter the frame form.')]
     #[Gedmo\Translatable]
     private ?string $frameForm = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255), Assert\Regex(pattern: "/^[a-zA-Z]+$/"), Assert\NotBlank(message: 'Please enter tbe frame color.')]
     #[Gedmo\Translatable]
     private ?string $frameColor = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255), Assert\Regex(pattern: "/^[a-zA-Z]+$/"), Assert\NotBlank(message: 'Please enter the brand')]
     #[Gedmo\Translatable]
     private ?string $brand = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255), Assert\Regex(pattern: "/^[a-zA-Z]+$/"),
+        Assert\NotBlank(message: 'Please enter the lenz material,')]
     #[Gedmo\Translatable]
     private ?string $lenzMaterial = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255), Assert\Regex(pattern: "/^[a-zA-Z]+$/"),
+        Assert\NotBlank(message: 'Please enter the face form.')]
     #[Gedmo\Translatable]
     private ?string $faceForm = null;
 
-    #[ORM\Column]
+    #[ORM\Column, Assert\NotBlank(message: 'Please enter the price.'),
+        Assert\Positive(message: 'The {{ value }} is invalid.'), Assert\Type(type: 'float', message: 'The type is invalid.')]
     private ?float $price = null;
 
     #[ORM\ManyToOne(inversedBy: 'glasses')]
     #[ORM\JoinColumn(nullable: false)]
     private ?GlassesStore $glassesStore = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT), Assert\NotBlank(message: 'Please enter the description.')]
     #[Gedmo\Translatable]
     private ?string $description = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255), Assert\Regex(pattern: "/^[a-zA-Z0-9|\s\-]+$/"),
+        Assert\NotBlank(message: 'Please enter the model.')]
     private ?string $model = null;
 
     #[Gedmo\Locale]
@@ -188,26 +195,6 @@ class Glasses implements UserInterface, TimeInterface, Translatable
         $this->description = $description;
 
         return $this;
-    }
-
-    public function getCreatedBy()
-    {
-        // TODO: Implement getCreatedBy() method.
-    }
-
-    public function setCreatedBy($user)
-    {
-        // TODO: Implement setCreatedBy() method.
-    }
-
-    public function getUpdatedBy()
-    {
-        // TODO: Implement getUpdatedBy() method.
-    }
-
-    public function setUpdatedBy($user)
-    {
-        // TODO: Implement setUpdatedBy() method.
     }
 
     public function getModel(): ?string

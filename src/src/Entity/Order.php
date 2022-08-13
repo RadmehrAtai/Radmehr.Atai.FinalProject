@@ -5,8 +5,6 @@ namespace App\Entity;
 use App\Model\TimeInterface;
 use App\Model\TimeTrait;
 use App\Repository\OrderRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
@@ -60,26 +58,6 @@ class Order implements TimeInterface
         $this->status = $status;
 
         return $this;
-    }
-
-    public function getCreatedAt()
-    {
-        // TODO: Implement getCreatedAt() method.
-    }
-
-    public function setCreatedAt($dateTime)
-    {
-        // TODO: Implement setCreatedAt() method.
-    }
-
-    public function getUpdatedAt()
-    {
-        // TODO: Implement getUpdatedAt() method.
-    }
-
-    public function setUpdatedAt($dateTime)
-    {
-        // TODO: Implement setUpdatedAt() method.
     }
 
     public function getTotalCost(): ?float

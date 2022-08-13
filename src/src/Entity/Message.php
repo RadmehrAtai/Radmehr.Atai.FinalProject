@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\MessageRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: MessageRepository::class)]
 class Message
@@ -14,13 +15,15 @@ class Message
     #[ORM\Column()]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255), Assert\Regex(pattern: "/^[a-zA-Z]+$/"), Assert\NotBlank(message: 'Please enter your name.')]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255), Assert\Email(
+        message: 'The email {{ value }} is not a valid email.',
+    ), Assert\NotBlank(message: 'Please enter your email address!')]
     private ?string $email = null;
 
-    #[ORM\Column(type: Types::TEXT)]
+    #[ORM\Column(type: Types::TEXT), Assert\NotBlank(message: 'Please enter your message.')]
     private ?string $message = null;
 
     public function getId(): ?int

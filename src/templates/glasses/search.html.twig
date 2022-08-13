@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}New Order{% endblock %}
+{% block title %}Search for {{ query }}{% endblock %}
 
 {% block body %}
     <header>
@@ -62,11 +62,54 @@
         {#        </div>#}
     </div>
 
-    <h1>Create new Order</h1>
+    <h1>Glasses List</h1>
 
-    {{ include('order/_form.html.twig') }}
-
-    <a class="btn btn-primary" href="{{ path('app_order_index') }}">back to list</a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Model</th>
+            <th>FrameMaterial</th>
+            <th>FrameForm</th>
+            <th>FrameColor</th>
+            <th>Brand</th>
+            <th>LenzMaterial</th>
+            <th>FaceForm</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for glass in glasses %}
+            <tr>
+                <td>{{ glass.id }}</td>
+                <td>{{ glass.model }}</td>
+                <td>{{ glass.frameMaterial }}</td>
+                <td>{{ glass.frameForm }}</td>
+                <td>{{ glass.frameColor }}</td>
+                <td>{{ glass.brand }}</td>
+                <td>{{ glass.lenzMaterial }}</td>
+                <td>{{ glass.faceForm }}</td>
+                <td>{{ glass.price|format_currency('USD') }}</td>
+                <td>{{ glass.description }}</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ path('app_glasses_show', {'id': glass.id}) }}">show</a>
+                    {% if is_granted("ROLE_SELLER") %}
+                        <a class="btn btn-warning" href="{{ path('app_glasses_edit', {'id': glass.id}) }}">edit</a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% if is_granted("ROLE_SELLER") %}
+        <a class="btn btn-primary" href="{{ path('app_glasses_new') }}">Create new</a>
+    {% endif %}
 
     <footer class="text-center text-lg-start bg-light text-muted">
 

@@ -15,33 +15,33 @@ trait UserTrait
     /**
      * @return String
      */
-    public function getCreatedUser(): String
+    public function getCreatedBy(): mixed
     {
-        return $this->createdUser;
+        return $this->createdBy;
     }
 
     /**
-     * @param String $createdUser
+     * @param String $createdBy
      */
-    public function setCreatedUser($createdUser): void
+    public function setCreatedBy($createdBy): void
     {
-        $this->createdUser = $createdUser;
+        $this->createdBy = $createdBy;
     }
 
     /**
      * @return String
      */
-    public function getUpdatedUser(): String
+    public function getUpdatedBy(): mixed
     {
-        return $this->updatedUser;
+        return $this->updatedBy;
     }
 
     /**
-     * @param String $updatedUser
+     * @param String $updatedBy
      */
-    public function setUpdatedUser($updatedUser): void
+    public function setUpdatedBy($updatedBy): void
     {
-        $this->updatedUser = $updatedUser;
+        $this->updatedBy = $updatedBy;
     }
 
 

@@ -41,7 +41,7 @@ class GlassesController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_glasses_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'app_glasses_show', requirements: ['id' => '\d+'], methods: ['GET'])]
     public function show(Glasses $glass): Response
     {
         return $this->render('glasses/show.html.twig', [
@@ -67,7 +67,7 @@ class GlassesController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_glasses_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'app_glasses_delete', requirements: ['id' => '\d+'], methods: ['POST'])]
     public function delete(Request $request, Glasses $glass, GlassesRepository $glassesRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$glass->getId(), $request->request->get('_token'))) {

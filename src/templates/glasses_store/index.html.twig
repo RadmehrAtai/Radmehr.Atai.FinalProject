@@ -51,28 +51,28 @@
     <div class="m-5">
         <div class="input-group m-5">
             <form class="form-inline" method="get" action="{{ path('app_glasses_search') }}">
-                <input class="form-control mr-sm-2" name="query" type="text" placeholder="Search..."
+                <input class="form-control mr-sm-2" name="query" type="text" placeholder="Search By Brand or Model"
                        aria-label="Search">
                 <input class="btn btn-outline-success my-2 my-sm-0" value="Search" type="submit">
             </form>
         </div>
-        {#        <div>#}
-        {#            <a href="{{ path('app_home_index', ['_locate' : 'en']) }}">en</a>#}
-        {#            <a href="{{ path('app_home_index', ['_locate' : 'fa']) }}">fa</a>#}
-        {#        </div>#}
+        {#        <div> #}
+        {#            <a href="{{ path('app_home_index', ['_locate' : 'en']) }}">en</a> #}
+        {#            <a href="{{ path('app_home_index', ['_locate' : 'fa']) }}">fa</a> #}
+        {#        </div> #}
     </div>
 
     <h1>GlassesStores List</h1>
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Phone</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for glasses_store in glasses_stores %}
@@ -82,8 +82,15 @@
                 <td>{{ glasses_store.address }}</td>
                 <td>{{ glasses_store.phone }}</td>
                 <td>
-                    <a class="btn btn-primary" href="{{ path('app_glasses_store_show', {'id': glasses_store.id}) }}">show</a>
-                    <a class="btn btn-warning" href="{{ path('app_glasses_store_edit', {'id': glasses_store.id}) }}">edit</a>
+                    <a class="btn btn-primary" href="{{ path('app_glasses_store_show', {'id': glasses_store.id}) }}">Show
+                        Store</a>
+                    {% if is_granted("ROLE_SELLER") %}
+                        <a class="btn btn-warning"
+                           href="{{ path('app_glasses_store_edit', {'id': glasses_store.id}) }}">Edit Store</a>
+                        <a class="btn btn-danger"
+                           href="{{ path('app_glasses_new') }}">Add Glasses</a>
+                    {% endif %}
+
                 </td>
             </tr>
         {% else %}
@@ -94,7 +101,9 @@
         </tbody>
     </table>
 
-    <a class="btn btn-primary" href="{{ path('app_glasses_store_new') }}">Create new</a>
+    {% if is_granted("ROLE_SELLER") %}
+        <a class="btn btn-primary" href="{{ path('app_glasses_store_new') }}">New Store</a>
+    {% endif %}
 
     <footer class="text-center text-lg-start bg-light text-muted">
 

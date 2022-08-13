@@ -51,7 +51,7 @@
     <div class="m-5">
         <div class="input-group m-5">
             <form class="form-inline" method="get" action="{{ path('app_glasses_search') }}">
-                <input class="form-control mr-sm-2" name="query" type="text" placeholder="Search..."
+                <input class="form-control mr-sm-2" name="query" type="text" placeholder="Search By Brand or Model"
                        aria-label="Search">
                 <input class="btn btn-outline-success my-2 my-sm-0" value="Search" type="submit">
             </form>
@@ -84,18 +84,20 @@
         {% for glass in glasses %}
             <tr>
                 <td>{{ glass.id }}</td>
-                <td>{{ glasss.model }}</td>
+                <td>{{ glass.model }}</td>
                 <td>{{ glass.frameMaterial }}</td>
                 <td>{{ glass.frameForm }}</td>
                 <td>{{ glass.frameColor }}</td>
                 <td>{{ glass.brand }}</td>
                 <td>{{ glass.lenzMaterial }}</td>
                 <td>{{ glass.faceForm }}</td>
-                <td>{{ glass.price }}</td>
+                <td>{{ glass.price|format_currency('USD') }}</td>
                 <td>{{ glass.description }}</td>
                 <td>
                     <a class="btn btn-primary" href="{{ path('app_glasses_show', {'id': glass.id}) }}">show</a>
-                    <a class="btn btn-warning" href="{{ path('app_glasses_edit', {'id': glass.id}) }}">edit</a>
+                    {% if is_granted("ROLE_SELLER") %}
+                        <a class="btn btn-warning" href="{{ path('app_glasses_edit', {'id': glass.id}) }}">edit</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
@@ -105,9 +107,9 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a class="btn btn-primary" href="{{ path('app_glasses_new') }}">Create new</a>
-
+    {% if is_granted("ROLE_SELLER") %}
+        <a class="btn btn-primary" href="{{ path('app_glasses_new') }}">Create new</a>
+    {% endif %}
     <footer class="text-center text-lg-start bg-light text-muted">
 
         <section class="border-bottom">

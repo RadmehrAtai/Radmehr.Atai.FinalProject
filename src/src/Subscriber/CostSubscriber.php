@@ -25,15 +25,8 @@ class CostSubscriber implements EventSubscriber
         if (!$entity instanceof Order) {
             return;
         }
+        $product = $entity->getProduct();
 
-        $total = 0;
-        $products = $entity->getProducts();
-
-        /** @var Glasses $product */
-        foreach ($products as $product) {
-            $total = $product->getPrice() + $total;
-        }
-
-        $entity->setTotalCost($total);
+        $entity->setTotalCost($product->getPrice());
     }
 }

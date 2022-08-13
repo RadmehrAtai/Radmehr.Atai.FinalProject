@@ -20,7 +20,7 @@ class SearchService
 
         $hotelRepository = $this->entityManager->getRepository(Glasses::class);
         return $hotelRepository->createQueryBuilder('h')
-            ->where('h.model like :q')
+            ->where('h.model like :q OR h.brand like :q')
             ->setParameter('q', '%' . $input . '%')
             ->getQuery()
             ->getResult();

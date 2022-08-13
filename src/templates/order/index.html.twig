@@ -51,7 +51,7 @@
     <div class="m-5">
         <div class="input-group m-5">
             <form class="form-inline" method="get" action="{{ path('app_glasses_search') }}">
-                <input class="form-control mr-sm-2" name="query" type="text" placeholder="Search..."
+                <input class="form-control mr-sm-2" name="query" type="text" placeholder="Search By Brand or Model"
                        aria-label="Search">
                 <input class="btn btn-outline-success my-2 my-sm-0" value="Search" type="submit">
             </form>
@@ -70,6 +70,7 @@
                 <th>Id</th>
                 <th>Status</th>
                 <th>TotalCost</th>
+                <th>Product</th>
                 <th>CreatedAt</th>
                 <th>UpdatedAt</th>
                 <th>actions</th>
@@ -81,6 +82,7 @@
                 <td>{{ order.id }}</td>
                 <td>{{ order.status }}</td>
                 <td>{{ order.totalCost }}</td>
+                <td>{{ order.product }}</td>
                 <td>{{ order.createdAt ? order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ order.updatedAt ? order.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
