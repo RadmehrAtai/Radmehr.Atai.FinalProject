@@ -56,10 +56,10 @@
                 <input class="btn btn-outline-success my-2 my-sm-0" value="Search" type="submit">
             </form>
         </div>
-        {#        <div>#}
-        {#            <a href="{{ path('app_home_index', ['_locate' : 'en']) }}">en</a>#}
-        {#            <a href="{{ path('app_home_index', ['_locate' : 'fa']) }}">fa</a>#}
-        {#        </div>#}
+        <div>
+            <a href="{{ path('app_home_index', {'_locale': 'en'}) }}" >en</a>
+            <a href="{{ path('app_home_index', {'_locale': 'fa'}) }}" >fa</a>
+        </div>
     </div>
 
     <h1>Glasses List</h1>
@@ -107,9 +107,6 @@
         {% endfor %}
         </tbody>
     </table>
-    {% if is_granted("ROLE_SELLER") %}
-        <a class="btn btn-primary" href="{{ path('app_glasses_new') }}">Create new</a>
-    {% endif %}
 
     <footer class="text-center text-lg-start bg-light text-muted">
 

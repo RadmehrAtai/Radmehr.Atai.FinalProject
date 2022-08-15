@@ -56,10 +56,10 @@
                 <input class="btn btn-outline-success my-2 my-sm-0" value="Search" type="submit">
             </form>
         </div>
-        {#        <div>#}
-        {#            <a href="{{ path('app_home_index', ['_locate' : 'en']) }}">en</a>#}
-        {#            <a href="{{ path('app_home_index', ['_locate' : 'fa']) }}">fa</a>#}
-        {#        </div>#}
+        <div>
+            <a href="{{ path('app_home_index', {'_locale': 'en'}) }}" >en</a>
+            <a href="{{ path('app_home_index', {'_locale': 'fa'}) }}" >fa</a>
+        </div>
     </div>
 
     <h1 class="mt-5">{{ glasses_store.name }}</h1>
@@ -70,7 +70,7 @@
         Address: {{ glasses_store.address }}
     </p>
 
-    <h1 class="mt-5">Our Glasses</h1>
+    <h1 class="mt-5">{{ 'app.glassstore.ourglasses'|trans }}</h1>
     {% for glasses in glasses_store.glasses %}
         <div class="card m-3 d-inline-block"
              style="width: 18rem; background-color: #888;">
@@ -82,14 +82,16 @@
                 <p class="card-text fw-bold">
                     {{ glasses.price|format_currency('USD') }}
                 </p>
-                <a class="btn btn-primary" href="{{ path('app_glasses_show', {'id': glasses.id}) }}">Show</a>
+                <a class="btn btn-primary" href="{{ path('app_glasses_show', {'id': glasses.id}) }}">
+                    {{ 'app.glassstore.showglasses'|trans }}</a>
             </div>
         </div>
     {% endfor %}
 
-    <a class="btn btn-primary" href="{{ path('app_glasses_store_index') }}">back to list</a>
+    <a class="btn btn-primary" href="{{ path('app_glasses_store_index') }}">{{ 'app.glassstore.back'|trans }}</a>
     {% if is_granted("ROLE_SELLER") %}
-        <a class="btn btn-warning" href="{{ path('app_glasses_store_edit', {'id': glasses_store.id}) }}">edit</a>
+        <a class="btn btn-warning" href="{{ path('app_glasses_store_edit', {'id': glasses_store.id}) }}">
+            {{ 'app.glassstore.edit'|trans }}</a>
     {% endif %}
 
     {% if is_granted("ROLE_SELLER") %}

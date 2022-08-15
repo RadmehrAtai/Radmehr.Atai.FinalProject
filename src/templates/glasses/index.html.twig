@@ -56,28 +56,28 @@
                 <input class="btn btn-outline-success my-2 my-sm-0" value="Search" type="submit">
             </form>
         </div>
-        {#        <div>#}
-        {#            <a href="{{ path('app_home_index', ['_locate' : 'en']) }}">en</a>#}
-        {#            <a href="{{ path('app_home_index', ['_locate' : 'fa']) }}">fa</a>#}
-        {#        </div>#}
+        <div>
+            <a href="{{ path('app_home_index', {'_locale': 'en'}) }}" >en</a>
+            <a href="{{ path('app_home_index', {'_locale': 'fa'}) }}" >fa</a>
+        </div>
     </div>
 
-    <h1>Glasses List</h1>
+    <h1>{{ 'app.glasses.title'|trans }}</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Model</th>
-                <th>FrameMaterial</th>
-                <th>FrameForm</th>
-                <th>FrameColor</th>
-                <th>Brand</th>
-                <th>LenzMaterial</th>
-                <th>FaceForm</th>
-                <th>Price</th>
-                <th>Description</th>
-                <th>actions</th>
+                <th>{{ 'app.glasses.id'|trans }}</th>
+                <th>{{ 'app.glasses.model'|trans }}</th>
+                <th>{{ 'app.glasses.framematerial'|trans }}</th>
+                <th>{{ 'app.glasses.frameform'|trans }}</th>
+                <th>{{ 'app.glasses.framecolor'|trans }}</th>
+                <th>{{ 'app.glasses.brand'|trans }}</th>
+                <th>{{ 'app.glasses.lenzmaterial'|trans }}</th>
+                <th>{{ 'app.glasses.faceform'|trans }}</th>
+                <th>{{ 'app.glasses.price'|trans }}</th>
+                <th>{{ 'app.glasses.description'|trans }}</th>
+                <th>{{ 'app.glasses.actions'|trans }}</th>
             </tr>
         </thead>
         <tbody>
@@ -94,21 +94,21 @@
                 <td>{{ glass.price|format_currency('USD') }}</td>
                 <td>{{ glass.description }}</td>
                 <td>
-                    <a class="btn btn-primary" href="{{ path('app_glasses_show', {'id': glass.id}) }}">show</a>
+                    <a class="btn btn-primary" href="{{ path('app_glasses_show', {'id': glass.id}) }}">{{ 'app.glasses.show'|trans }}</a>
                     {% if is_granted("ROLE_SELLER") %}
-                        <a class="btn btn-warning" href="{{ path('app_glasses_edit', {'id': glass.id}) }}">edit</a>
+                        <a class="btn btn-warning" href="{{ path('app_glasses_edit', {'id': glass.id}) }}">{{ 'app.glasses.edit'|trans }}</a>
                     {% endif %}
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="10">no records found</td>
+                <td colspan="10">{{ 'app.glasses.not'|trans }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
     {% if is_granted("ROLE_SELLER") %}
-        <a class="btn btn-primary" href="{{ path('app_glasses_new') }}">Create new</a>
+        <a class="btn btn-primary" href="{{ path('app_glasses_new') }}">{{ 'app.hotels.create'|trans }}</a>
     {% endif %}
     <footer class="text-center text-lg-start bg-light text-muted">
 

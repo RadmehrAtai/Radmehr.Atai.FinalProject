@@ -21,10 +21,11 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('firstName', TextType::class)
-            ->add('lastName', TextType::class)
-            ->add('email', EmailType::class)
+            ->add('firstName', TextType::class, ['label' => 'forms.register.firstname'])
+            ->add('lastName', TextType::class, ['label' => 'forms.register.lastname'])
+            ->add('email', EmailType::class, ['label' => 'forms.register.email'])
             ->add('roles', CollectionType::class, [
+                'label' => 'forms.register.roles',
                 'entry_type'   => ChoiceType::class,
                 'entry_options'  => [
                     'choices'  => [
@@ -35,6 +36,7 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('agreeTerms', CheckboxType::class, [
+                'label' => 'forms.register.agree',
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
@@ -45,6 +47,7 @@ class RegistrationFormType extends AbstractType
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
+                'label' => 'forms.register.password',
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [

@@ -56,13 +56,13 @@
                 <input class="btn btn-outline-success my-2 my-sm-0" value="Search" type="submit">
             </form>
         </div>
-        {#        <div>#}
-        {#            <a href="{{ path('app_home_index', ['_locate' : 'en']) }}">en</a>#}
-        {#            <a href="{{ path('app_home_index', ['_locate' : 'fa']) }}">fa</a>#}
-        {#        </div>#}
+        <div>
+            <a href="{{ path('app_home_index', {'_locale': 'en'}) }}" >en</a>
+            <a href="{{ path('app_home_index', {'_locale': 'fa'}) }}" >fa</a>
+        </div>
     </div>
 
-    <h1>Register</h1>
+    <h1>{{ 'forms.register.title'|trans }}</h1>
 
     {{ form_start(registrationForm) }}
         {{ form_row(registrationForm.firstName) }}
@@ -74,7 +74,7 @@
         }) }}
         {{ form_row(registrationForm.agreeTerms) }}
 
-        <button type="submit" class="btn btn-primary">Register</button>
+        <button type="submit" class="btn btn-primary">{{ 'forms.register.registeration'|trans }}</button>
     {{ form_end(registrationForm) }}
 
     <footer class="text-center text-lg-start bg-light text-muted">

@@ -2,15 +2,15 @@
 
 namespace App\Security;
 
-use App\Entity\Glasses;
 use App\Entity\GlassesStore;
+use App\Entity\Order;
 use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\Security;
 
 
-class OwnerVoter extends Voter
+class BuyerVoter extends Voter
 {
     const EDIT = 'edit';
     const DELETE = 'delete';
@@ -31,8 +31,8 @@ class OwnerVoter extends Voter
             return false;
         }
 
-        // vote on `GlassesStore` and `Glasses` objects
-        if (!$subject instanceof GlassesStore) {
+        // only vote on `Order` objects
+        if (!$subject instanceof Order) {
             return false;
         }
 
@@ -46,18 +46,18 @@ class OwnerVoter extends Voter
             return false;
         }
 
-        /** @var GlassesStore $glassesStore */
-        $glassesStore = $subject;
+        /** @var Order $order */
+        $order = $subject;
 
         switch ($attribute) {
             case self::VIEW:
                 return $this->canView();
             case self::EDIT:
-                return $this->canEdit($glassesStore, $user);
+                return $this->canEdit($order, $user);
             case self::NEW:
-                return $this->canNew($glassesStore, $user);
+                return $this->canNew($order, $user);
             case self::DELETE:
-                return $this->canDelete($glassesStore, $user);
+                return $this->canDelete($order, $user);
         }
 
         throw new \LogicException('This code should not be reached!');
@@ -65,21 +65,21 @@ class OwnerVoter extends Voter
 
     private function canView(): bool
     {
-        return true;
+        return $this->security->isGranted('ROLE_BUYER');
     }
 
-    private function canEdit(GlassesStore $glassesStore, User $user): bool
+    private function canEdit(Order $order, User $user): bool
     {
-        return $glassesStore->getOwner() === $user;
+        return $order->getBuyer() === $user;
     }
 
-    private function canNew(GlassesStore $glassesStore, User $user): bool
+    private function canNew(Order $order, User $user): bool
     {
-        return $this->security->isGranted('ROLE_SELLER');
+        return $this->security->isGranted('ROLE_BUYER');
     }
 
-    private function canDelete(GlassesStore $glassesStore, User $user): bool
+    private function canDelete(Order $order, User $user): bool
     {
-        return $glassesStore->getOwner() === $user;
+        return $order->getBuyer() === $user;
     }
 }

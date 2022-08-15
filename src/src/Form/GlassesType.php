@@ -3,7 +3,10 @@
 namespace App\Form;
 
 use App\Entity\Glasses;
+use App\Entity\GlassesStore;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -15,17 +18,18 @@ class GlassesType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('model', TextType::class)
-            ->add('frameMaterial', TextType::class)
-            ->add('frameForm', TextType::class)
-            ->add('frameColor', TextType::class)
-            ->add('brand', TextType::class)
-            ->add('lenzMaterial', TextType::class)
-            ->add('faceForm', TextType::class)
-            ->add('price', MoneyType::class)
-            ->add('description', TextareaType::class)
-            ->add('glassesStore')
-        ;
+            ->add('model', TextType::class, ['label' => 'forms.glass.model'])
+            ->add('frameMaterial', TextType::class, ['label' => 'forms.glass.framematerial'])
+            ->add('frameForm', TextType::class, ['label' => 'forms.glass.frameform'])
+            ->add('frameColor', TextType::class, ['label' => 'forms.glass.framecolor'])
+            ->add('brand', TextType::class, ['label' => 'forms.glass.brand'])
+            ->add('lenzMaterial', TextType::class, ['label' => 'forms.glass.lenzmaterial'])
+            ->add('faceForm', TextType::class, ['label' => 'forms.glass.faceform'])
+            ->add('price', MoneyType::class, ['label' => 'forms.glass.price'])
+            ->add('description', TextareaType::class, ['label' => 'forms.glass.description'])
+            ->add('glassesStore', EntityType::class, [
+                'class' => GlassesStore::class,
+                'label' => 'forms.glass.glassstore']);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

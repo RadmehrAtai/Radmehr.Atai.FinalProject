@@ -84,6 +84,11 @@ class Glasses implements UserInterface, TimeInterface, Translatable
         $this->orders = new ArrayCollection();
     }
 
+    public function __toString(): string
+    {
+        return "{$this->model}";
+    }
+
     public function getId(): ?int
     {
         return $this->id;

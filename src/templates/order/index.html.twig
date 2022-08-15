@@ -56,24 +56,23 @@
                 <input class="btn btn-outline-success my-2 my-sm-0" value="Search" type="submit">
             </form>
         </div>
-        {#        <div>#}
-        {#            <a href="{{ path('app_home_index', ['_locate' : 'en']) }}">en</a>#}
-        {#            <a href="{{ path('app_home_index', ['_locate' : 'fa']) }}">fa</a>#}
-        {#        </div>#}
+        <div>
+            <a href="{{ path('app_home_index', {'_locale': 'en'}) }}" >en</a>
+            <a href="{{ path('app_home_index', {'_locale': 'fa'}) }}" >fa</a>
+        </div>
     </div>
 
-    <h1>Orders List</h1>
+    <h1>{{ 'app.order.title'|trans }}</h1>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Status</th>
-                <th>TotalCost</th>
-                <th>Product</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>actions</th>
+                <th>{{ 'app.order.id'|trans }}</th>
+                <th>{{ 'app.order.status'|trans }}</th>
+                <th>{{ 'app.order.cost'|trans }}</th>
+                <th>{{ 'app.order.product'|trans }}</th>
+                <th>{{ 'app.order.createdat'|trans }}</th>
+                <th>{{ 'app.order.actions'|trans }}</th>
             </tr>
         </thead>
         <tbody>
@@ -81,24 +80,25 @@
             <tr>
                 <td>{{ order.id }}</td>
                 <td>{{ order.status }}</td>
-                <td>{{ order.totalCost }}</td>
+                <td>{{ order.totalCost|format_currency('USD') }}</td>
                 <td>{{ order.product }}</td>
                 <td>{{ order.createdAt ? order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ order.updatedAt ? order.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a class="btn btn-primary" href="{{ path('app_order_show', {'id': order.id}) }}">show</a>
-                    <a class="btn btn-warning" href="{{ path('app_order_edit', {'id': order.id}) }}">edit</a>
+                    <a class="btn btn-primary" href="{{ path('app_order_show', {'id': order.id}) }}">
+                        {{ 'app.order.show'|trans }}</a>
+                    <a class="btn btn-warning" href="{{ path('app_order_edit', {'id': order.id}) }}">
+                        {{ 'app.order.edit'|trans }}</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="6">no records found</td>
+                <td colspan="6">{{ 'app.order.not'|trans }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a class="btn btn-primary" href="{{ path('app_order_new') }}">Create new</a>
+    <a class="btn btn-primary" href="{{ path('app_order_new') }}">{{ 'app.order.create'|trans }}</a>
 
     <footer class="text-center text-lg-start bg-light text-muted">
 

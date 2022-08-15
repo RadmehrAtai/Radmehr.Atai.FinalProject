@@ -14,9 +14,9 @@ class GlassesStoreType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name', TextType::class)
-            ->add('address', TextType::class)
-            ->add('phone', TelType::class)
+            ->add('name', TextType::class, ['label' => 'forms.glassstore.name'])
+            ->add('address', TextType::class, ['label' => 'forms.glassstore.address'])
+            ->add('phone', TelType::class, ['label' => 'forms.glassstore.phone'])
         ;
     }
 

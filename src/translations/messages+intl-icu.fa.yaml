@@ -1,0 +1,98 @@
+forms:
+  login:
+    title: 'لطفا وارد شوید!'
+    email: 'پست الکترونیکی'
+    password: 'رمز عبور'
+    signin: 'وارد شوید'
+
+  register:
+    title: 'فرم ثبت نام'
+    firstname: 'نام'
+    lastname: 'نام خانوادگی'
+    email: 'پست الکترونیکی'
+    roles: 'نقش ها'
+    agree: 'موافقت با قوانین'
+    password: 'رمز عبور'
+    registeration: 'ثبت نام'
+
+  glassstore:
+    name: 'نام'
+    address: 'آدرس پستی'
+    phone: 'شماره تلفن'
+
+  glass:
+    model: 'مدل'
+    framematerial: 'جنس فریم'
+    frameform: 'فرم فریم'
+    framecolor: 'رنک فریم'
+    brand: 'برند'
+    lenzmaterial: 'جنس لنز'
+    faceform: 'فرم صورت'
+    price: 'قیمت'
+    description: 'توضیحات'
+    glassstore: 'عینک فروشی'
+
+  message:
+    name: 'نام'
+    email: 'پست الکترونیکی'
+    messages: 'پیغام'
+
+app:
+  glassstore:
+    title: 'لیست عینک فروشی ها'
+    ourglasses: 'عینک های ما'
+    id: 'آی دی'
+    name: 'نام'
+    address: 'آدرس پستی'
+    phone: 'شماره تلغن'
+    actions: 'عمل ها'
+    show: 'مشاهده عینک فروشی'
+    showglasses: 'مشاهده عینک'
+    edit: 'ویرایش عینک فروشی'
+    update: 'بروز رسانی عینک فروشی'
+    delete: 'حذف عینک فروشی'
+    not: 'چیزی یافت نشد'
+    back: 'برگشت به لیست'
+    newglasses: 'عینک جدید'
+    create: 'عینک فروشی جدید'
+
+
+  glasses:
+    title: 'لیست عینک ها'
+    id: 'آی دی'
+    model: 'مدل'
+    framematerial: 'جنس فریم'
+    frameform: 'فرم قریم'
+    framecolor: 'رنک فریم'
+    brand: 'برند'
+    lenzmaterial: 'جنس لنز'
+    faceform: 'فرم صورت'
+    price: 'قیمت'
+    description: 'توضیحات'
+    actions: 'عمل ها'
+    show: 'مشاهده عینک'
+    edit: 'ویرایش عینک'
+    update: 'بروز رسانی عینک'
+    delete: 'حذف عینک'
+    not: 'چیزی یافت نشد'
+    back: 'برگشت به لیست'
+    create: 'عینک جدید'
+
+  message:
+    create: 'پیغام جدید'
+
+  order:
+    title: 'لیست سفارشات'
+    id: 'آی دی'
+    status: 'وضعیت'
+    cost: 'هزینه'
+    product: 'محصول'
+    createdat: 'ایحاد شده در'
+    actions: 'عمل ها'
+    show: 'مشاهده سفارش'
+    edit: 'ویرایش سفارش'
+    update: 'بروز زسانی سفارش'
+    delete: 'حذف سفارش'
+    not: 'چیزی یافت نشد'
+    back: 'برکشت به لیست'
+    create: 'سفارش جدید'

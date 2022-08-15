@@ -1,0 +1,98 @@
+forms:
+  login:
+    title: Please Sign in!
+    email: Email
+    password: Password
+    signin: Sign in
+
+  register:
+    title: Registeration
+    firstname: First Name
+    lastname: Last Name
+    email: Email
+    roles: Roles
+    agree: Agree Terms
+    password: Password
+    registeration: Register
+
+  glassstore:
+    name: Name
+    address: Address
+    phone: Phone
+
+  glass:
+    model: Model
+    framematerial: Frame Material
+    frameform: Frame Form
+    framecolor: Frame Color
+    brand: Brand
+    lenzmaterial: Lenz Material
+    faceform: Face Form
+    price: Price
+    description: Description
+    glassstore: Glass Stores
+
+  message:
+    name: Name
+    email: Email
+    messages: Message
+
+app:
+  glassstore:
+    title: Glass Stores List
+    ourglasses: Our Glasses
+    id: Id
+    name: Name
+    address: Address
+    phone: Phone
+    actions: Actions
+    show: Show Store
+    showglasses: Show Glasses
+    edit: Edit Store
+    update: Update Store
+    delete: Delete Store
+    not: No records found
+    back: Back to list
+    newglasses: New Glasses
+    create: New Glass Store
+
+
+  glasses:
+    title: Glasses List
+    id: Id
+    model: Model
+    framematerial: Frame Material
+    frameform: Frame Form
+    framecolor: Frame Color
+    brand: Brand
+    lenzmaterial: Lenz Material
+    faceform: Face Form
+    price: Price
+    description: Description
+    actions: Actions
+    show: Show
+    edit: Edit
+    update: Update
+    delete: Delete
+    not: No records found
+    back: Back to list
+    create: New Glasses
+
+  message:
+    create: New Message
+
+  order:
+    title: Orders List
+    id: Id
+    status: Status
+    cost: Cost
+    product: Product
+    createdat: Created At
+    actions: Actions
+    show: Show Order
+    edit: Edit Order
+    update: Update Order
+    delete: Delete Order
+    not: No records found
+    back: Back to list
+    create: New Order

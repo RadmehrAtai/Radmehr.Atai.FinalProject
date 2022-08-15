@@ -44,6 +44,7 @@ class OrderController extends AbstractController
         $order = new Order();
         $form = $this->createForm(OrderType::class, $order);
         $form->handleRequest($request);
+        $this->denyAccessUnlessGranted('new', $order);
 
         $token = $this->tokenStorage->getToken();
         if ($token instanceof TokenInterface) {
@@ -67,6 +68,7 @@ class OrderController extends AbstractController
     #[Route('/{id}', name: 'app_order_show', methods: ['GET'])]
     public function show(Order $order): Response
     {
+        $this->denyAccessUnlessGranted('view', $order);
         return $this->render('order/show.html.twig', [
             'order' => $order,
         ]);
@@ -77,6 +79,7 @@ class OrderController extends AbstractController
     {
         $form = $this->createForm(OrderType::class, $order);
         $form->handleRequest($request);
+        $this->denyAccessUnlessGranted('edit', $order);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $orderRepository->add($order, true);
@@ -93,6 +96,7 @@ class OrderController extends AbstractController
     #[Route('/{id}', name: 'app_order_delete', methods: ['POST'])]
     public function delete(Request $request, Order $order, OrderRepository $orderRepository): Response
     {
+        $this->denyAccessUnlessGranted('delete', $order);
         if ($this->isCsrfTokenValid('delete'.$order->getId(), $request->request->get('_token'))) {
             $orderRepository->remove($order, true);
         }
