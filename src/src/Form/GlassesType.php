@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -27,6 +28,7 @@ class GlassesType extends AbstractType
             ->add('faceForm', TextType::class, ['label' => 'forms.glass.faceform'])
             ->add('price', MoneyType::class, ['label' => 'forms.glass.price'])
             ->add('description', TextareaType::class, ['label' => 'forms.glass.description'])
+            ->add('imageUrl', UrlType::class, ['label' => 'forms.glass.url'])
             ->add('glassesStore', EntityType::class, [
                 'class' => GlassesStore::class,
                 'label' => 'forms.glass.glassstore']);

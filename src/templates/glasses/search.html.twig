@@ -3,81 +3,22 @@
 {% block title %}Search for {{ query }}{% endblock %}
 
 {% block body %}
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex">
-            <span class="navbar-brand mb-0 mx-2 h1">My Glasses</span>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_home_index') }}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_glasses_store_index') }}">Shop</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_about_index') }}">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_message_new') }}">Contact Us</a>
-                </ul>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                            <li class="nav-item">
-                                <a class="nav-link"><span>Welcome!</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path('app_logout') }}"><span
-                                            class="glyphicon glyphicon-user"></span>
-                                    Logout</a>
-                            </li>
-                        {% else %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path('app_register') }}"><span
-                                            class="glyphicon glyphicon-user"></span>
-                                    Register</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path('app_login') }}"><span
-                                            class="glyphicon glyphicon-log-in"></span> Login</a>
-                            </li>
-                        {% endif %}
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <div class="m-5">
-        <div class="input-group m-5">
-            <form class="form-inline" method="get" action="{{ path('app_glasses_search') }}">
-                <input class="form-control mr-sm-2" name="query" type="text" placeholder="Search By Brand or Model"
-                       aria-label="Search">
-                <input class="btn btn-outline-success my-2 my-sm-0" value="Search" type="submit">
-            </form>
-        </div>
-        <div>
-            <a href="{{ path('app_home_index', {'_locale': 'en'}) }}" >en</a>
-            <a href="{{ path('app_home_index', {'_locale': 'fa'}) }}" >fa</a>
-        </div>
-    </div>
-
-    <h1>Glasses List</h1>
+    <h1>{{ 'app.glasses.title'|trans }}</h1>
 
     <table class="table">
         <thead>
         <tr>
-            <th>Id</th>
-            <th>Model</th>
-            <th>FrameMaterial</th>
-            <th>FrameForm</th>
-            <th>FrameColor</th>
-            <th>Brand</th>
-            <th>LenzMaterial</th>
-            <th>FaceForm</th>
-            <th>Price</th>
-            <th>Description</th>
-            <th>actions</th>
+            <th>{{ 'app.glasses.id'|trans }}</th>
+            <th>{{ 'app.glasses.model'|trans }}</th>
+            <th>{{ 'app.glasses.framematerial'|trans }}</th>
+            <th>{{ 'app.glasses.frameform'|trans }}</th>
+            <th>{{ 'app.glasses.framecolor'|trans }}</th>
+            <th>{{ 'app.glasses.brand'|trans }}</th>
+            <th>{{ 'app.glasses.lenzmaterial'|trans }}</th>
+            <th>{{ 'app.glasses.faceform'|trans }}</th>
+            <th>{{ 'app.glasses.price'|trans }}</th>
+            <th>{{ 'app.glasses.description'|trans }}</th>
+            <th>{{ 'app.glasses.actions'|trans }}</th>
         </tr>
         </thead>
         <tbody>
@@ -94,27 +35,18 @@
                 <td>{{ glass.price|format_currency('USD') }}</td>
                 <td>{{ glass.description }}</td>
                 <td>
-                    <a class="btn btn-primary" href="{{ path('app_glasses_show', {'id': glass.id}) }}">show</a>
+                    <a class="btn btn-primary" href="{{ path('app_glasses_show', {'id': glass.id}) }}">{{ 'app.glasses.show'|trans }}</a>
                     {% if is_granted("ROLE_SELLER") %}
-                        <a class="btn btn-warning" href="{{ path('app_glasses_edit', {'id': glass.id}) }}">edit</a>
+                        <a class="btn btn-warning" href="{{ path('app_glasses_edit', {'id': glass.id}) }}">{{ 'app.glasses.edit'|trans }}</a>
                     {% endif %}
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="10">no records found</td>
+                <td colspan="10">{{ 'app.glasses.not'|trans }}</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <footer class="text-center text-lg-start bg-light text-muted">
-
-        <section class="border-bottom">
-        </section>
-
-        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-            © 2022 Copyright My Glasses
-        </div>
-    </footer>
 {% endblock %}

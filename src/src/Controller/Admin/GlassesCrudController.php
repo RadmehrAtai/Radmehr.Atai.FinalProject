@@ -11,6 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TelephoneField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\UrlField;
 
 class GlassesCrudController extends AbstractCrudController
 {
@@ -33,6 +34,7 @@ class GlassesCrudController extends AbstractCrudController
             TextField::new('faceForm'),
             MoneyField::new('price')->setCurrency("USD"),
             TextareaField::new('description'),
+            UrlField::new('imageUrl'),
             AssociationField::new('glassesStore')
         ];
     }

@@ -1,3 +1,25 @@
+page:
+  header:
+    title: My Glasses
+    home: Home
+    shop: Shop
+    aboutus: About Us
+    contactus: Contact Us
+    register: Register
+    login: Login
+    logout: Logout
+    welcome: Welcome!
+
+  footer:
+    copyright: © COPYRIGHT 2022 MY GLASSES ®, INC. ALL RIGHTS RESERVED.
+
+  home:
+    title: Welcome to My Glasses Shopping Centre
+
+  search:
+    value: Search by Brand or Model
+    button: Search
+
 forms:
   login:
     title: Please Sign in!
@@ -19,6 +41,7 @@ forms:
     name: Name
     address: Address
     phone: Phone
+    url: Image Url
 
   glass:
     model: Model
@@ -30,6 +53,7 @@ forms:
     faceform: Face Form
     price: Price
     description: Description
+    url: Image Url
     glassstore: Glass Stores
 
   message:
@@ -90,9 +114,7 @@ app:
     createdat: Created At
     actions: Actions
     show: Show Order
-    edit: Edit Order
-    update: Update Order
-    delete: Delete Order
+    delete: Cancel Order
     not: No records found
     back: Back to list
-    create: New Order
+    create: Order

@@ -1,3 +1,25 @@
+page:
+  header:
+    title: 'عینک من'
+    home: 'خانه'
+    shop: 'فروشگاه'
+    aboutus: 'درباره ما'
+    contactus: 'تماس با ما'
+    register: 'ثبت نام'
+    login: 'ورود'
+    logout: 'خروج'
+    welcome: 'خوش آمدید'
+
+  footer:
+    copyright: '.تمامی حقوق محفوظ است'
+
+  home:
+    title: 'به فروشگاه عینک من خوش آمدید'
+
+  search:
+    value: 'جستجو ار طریق مدل یا برند'
+    button: 'جستجو'
+
 forms:
   login:
     title: 'لطفا وارد شوید!'
@@ -90,9 +112,7 @@ app:
     createdat: 'ایحاد شده در'
     actions: 'عمل ها'
     show: 'مشاهده سفارش'
-    edit: 'ویرایش سفارش'
-    update: 'بروز زسانی سفارش'
     delete: 'حذف سفارش'
     not: 'چیزی یافت نشد'
     back: 'برکشت به لیست'
-    create: 'سفارش جدید'
+    create: 'سفارش'

@@ -79,6 +79,9 @@ class Glasses implements UserInterface, TimeInterface, Translatable
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: Order::class, orphanRemoval: true)]
     private Collection $orders;
 
+    #[ORM\Column(length: 255)]
+    private ?string $imageUrl = null;
+
     public function __construct()
     {
         $this->orders = new ArrayCollection();
@@ -245,6 +248,18 @@ class Glasses implements UserInterface, TimeInterface, Translatable
                 $order->setProduct(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImageUrl(): ?string
+    {
+        return $this->imageUrl;
+    }
+
+    public function setImageUrl(string $imageUrl): self
+    {
+        $this->imageUrl = $imageUrl;
 
         return $this;
     }

@@ -22,7 +22,7 @@ class OrderCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('status'),
             AssociationField::new('buyer'),
-            AssociationField::new('products')
+            AssociationField::new('product')
         ];
     }
 }

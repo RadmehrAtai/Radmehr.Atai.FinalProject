@@ -22,6 +22,7 @@
     "build": "encore production --progress"
   },
   "dependencies": {
-    "browserslist": "defaults"
+    "browserslist": "defaults",
+    "jquery": "^3.6.0"
   }
 }

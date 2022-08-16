@@ -3,82 +3,22 @@
 {% block title %}GlassesStore{% endblock %}
 
 {% block body %}
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex">
-            <span class="navbar-brand mb-0 mx-2 h1">My Glasses</span>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_home_index') }}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_glasses_store_index') }}">Shop</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_about_index') }}">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_message_new') }}">Contact Us</a>
-                </ul>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ms-auto">
-                        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                            <li class="nav-item">
-                                <a class="nav-link"><span>Welcome!</span></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path('app_logout') }}"><span
-                                            class="glyphicon glyphicon-user"></span>
-                                    Logout</a>
-                            </li>
-                        {% else %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path('app_register') }}"><span
-                                            class="glyphicon glyphicon-user"></span>
-                                    Register</a>
-                            </li>
-                            <li>
-                                <a class="nav-link" href="{{ path('app_login') }}"><span
-                                            class="glyphicon glyphicon-log-in"></span> Login</a>
-                            </li>
-                        {% endif %}
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <div class="m-5">
-        <div class="input-group m-5">
-            <form class="form-inline" method="get" action="{{ path('app_glasses_search') }}">
-                <input class="form-control mr-sm-2" name="query" type="text" placeholder="Search By Brand or Model"
-                       aria-label="Search">
-                <input class="btn btn-outline-success my-2 my-sm-0" value="Search" type="submit">
-            </form>
-        </div>
-        <div>
-            <a href="{{ path('app_home_index', {'_locale': 'en'}) }}" >en</a>
-            <a href="{{ path('app_home_index', {'_locale': 'fa'}) }}" >fa</a>
-        </div>
-    </div>
-
     <h1 class="mt-5">{{ glasses_store.name }}</h1>
+    <img class="img-thumbnail" height="300px" width="300px" src="{{ glasses_store.imageUrl }}"
+         alt="{{ glasses_store.name }}">
     <p class="h6">
-        Phone: {{ glasses_store.phone }}
+        {{ 'app.glassstore.phone'|trans }}: {{ glasses_store.phone }}
     </p>
     <p class="h6 mb-5">
-        Address: {{ glasses_store.address }}
+        {{ 'app.glassstore.address'|trans }}: {{ glasses_store.address }}
     </p>
 
     <h1 class="mt-5">{{ 'app.glassstore.ourglasses'|trans }}</h1>
     {% for glasses in glasses_store.glasses %}
-        <div class="card m-3 d-inline-block"
-             style="width: 18rem; background-color: #888;">
+        <div class="card m-3 d-inline-block" style="width: 18rem;">
+            <img class="card-img-top" src="{{ glasses.imageUrl }}" alt="{{ glasses.model }}">
             <div class="card-body">
-                <h5 class="card-title">{{ glasses.model }}</h5>
-                <p class="card-text">
-                    {{ glasses.description }}
-                </p>
+                <h5 class="card-title">{{ glasses.brand }} {{ glasses.model }}</h5>
                 <p class="card-text fw-bold">
                     {{ glasses.price|format_currency('USD') }}
                 </p>
@@ -92,19 +32,7 @@
     {% if is_granted("ROLE_SELLER") %}
         <a class="btn btn-warning" href="{{ path('app_glasses_store_edit', {'id': glasses_store.id}) }}">
             {{ 'app.glassstore.edit'|trans }}</a>
-    {% endif %}
-
-    {% if is_granted("ROLE_SELLER") %}
         {{ include('glasses_store/_delete_form.html.twig') }}
     {% endif %}
 
-    <footer class="text-center text-lg-start bg-light text-muted">
-
-        <section class="border-bottom">
-        </section>
-
-        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-            © 2022 Copyright My Glasses
-        </div>
-    </footer>
 {% endblock %}

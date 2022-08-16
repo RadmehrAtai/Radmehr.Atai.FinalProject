@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Glasses;
 use App\Entity\Order;
 use App\Entity\User;
-use App\Form\OrderType;
 use App\Repository\OrderRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +21,7 @@ class OrderController extends AbstractController
     private $tokenStorage;
 
     /**
-     * @param TokenStorageInterface  $storage
+     * @param TokenStorageInterface $storage
      */
     public function __construct(
         TokenStorageInterface $storage,
@@ -38,13 +38,12 @@ class OrderController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_order_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, OrderRepository $orderRepository): Response
+    #[Route('/new/{id}', name: 'app_order_new', methods: ['GET', 'POST'])]
+    public function new(Glasses $glasses, OrderRepository $orderRepository): Response
     {
         $order = new Order();
-        $form = $this->createForm(OrderType::class, $order);
-        $form->handleRequest($request);
         $this->denyAccessUnlessGranted('new', $order);
+        $order->setProduct($glasses);
 
         $token = $this->tokenStorage->getToken();
         if ($token instanceof TokenInterface) {
@@ -53,16 +52,14 @@ class OrderController extends AbstractController
             $order->setBuyer($user);
         }
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $orderRepository->add($order, true);
+        $orderRepository->add($order, true);
 
-            return $this->redirectToRoute('app_order_index', [], Response::HTTP_SEE_OTHER);
-        }
+        $this->addFlash(
+            'success',
+            'You have successfully ordered a glasses.'
+        );
 
-        return $this->renderForm('order/new.html.twig', [
-            'order' => $order,
-            'form' => $form,
-        ]);
+        return $this->redirectToRoute('app_order_index');
     }
 
     #[Route('/{id}', name: 'app_order_show', methods: ['GET'])]
@@ -74,30 +71,11 @@ class OrderController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_order_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Order $order, OrderRepository $orderRepository): Response
-    {
-        $form = $this->createForm(OrderType::class, $order);
-        $form->handleRequest($request);
-        $this->denyAccessUnlessGranted('edit', $order);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $orderRepository->add($order, true);
-
-            return $this->redirectToRoute('app_order_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('order/edit.html.twig', [
-            'order' => $order,
-            'form' => $form,
-        ]);
-    }
-
     #[Route('/{id}', name: 'app_order_delete', methods: ['POST'])]
     public function delete(Request $request, Order $order, OrderRepository $orderRepository): Response
     {
         $this->denyAccessUnlessGranted('delete', $order);
-        if ($this->isCsrfTokenValid('delete'.$order->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $order->getId(), $request->request->get('_token'))) {
             $orderRepository->remove($order, true);
         }
 

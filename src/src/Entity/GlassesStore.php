@@ -49,6 +49,9 @@ class GlassesStore implements TimeInterface, Translatable, UserInterface
     #[Gedmo\Locale]
     private $locale;
 
+    #[ORM\Column(length: 255)]
+    private ?string $imageUrl = null;
+
     public function __construct()
     {
         $this->glasses = new ArrayCollection();
@@ -145,5 +148,17 @@ class GlassesStore implements TimeInterface, Translatable, UserInterface
     public function setTranslatableLocale($locale)
     {
         $this->locale = $locale;
+    }
+
+    public function getImageUrl(): ?string
+    {
+        return $this->imageUrl;
+    }
+
+    public function setImageUrl(string $imageUrl): self
+    {
+        $this->imageUrl = $imageUrl;
+
+        return $this;
     }
 }
