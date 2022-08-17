@@ -94,10 +94,10 @@ app:
     price: Price
     description: Description
     actions: Actions
-    show: Show
-    edit: Edit
-    update: Update
-    delete: Delete
+    show: Show Glasses
+    edit: Edit Glasses
+    update: Update Glasses
+    delete: Delete Glasses
     not: No records found
     back: Back to list
     create: New Glasses

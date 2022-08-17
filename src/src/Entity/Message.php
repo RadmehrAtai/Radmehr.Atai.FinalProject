@@ -20,7 +20,7 @@ class Message
 
     #[ORM\Column(length: 255), Assert\Email(
         message: 'The email {{ value }} is not a valid email.',
-    ), Assert\NotBlank(message: 'Please enter your email address!')]
+    ), Assert\NotBlank(message: 'Please enter your email address.')]
     private ?string $email = null;
 
     #[ORM\Column(type: Types::TEXT), Assert\NotBlank(message: 'Please enter your message.')]

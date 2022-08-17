@@ -31,10 +31,10 @@ class OwnerVoter extends Voter
             return false;
         }
 
-        // vote on `GlassesStore` and `Glasses` objects
-        if (!$subject instanceof GlassesStore) {
-            return false;
-        }
+//        // vote on `GlassesStore` and `Glasses` objects
+//        if (!$subject instanceof GlassesStore OR !$subject instanceof Glasses) {
+//            return false;
+//        }
 
         return true;
     }
@@ -46,18 +46,33 @@ class OwnerVoter extends Voter
             return false;
         }
 
-        /** @var GlassesStore $glassesStore */
-        $glassesStore = $subject;
+        if ($subject instanceof GlassesStore) {
+            $glassesStore = $subject;
 
-        switch ($attribute) {
-            case self::VIEW:
-                return $this->canView();
-            case self::EDIT:
-                return $this->canEdit($glassesStore, $user);
-            case self::NEW:
-                return $this->canNew($glassesStore, $user);
-            case self::DELETE:
-                return $this->canDelete($glassesStore, $user);
+            switch ($attribute) {
+                case self::VIEW:
+                    return $this->canView();
+                case self::EDIT:
+                    return $this->canEditGlassesStore($glassesStore, $user);
+                case self::NEW:
+                    return $this->canNewGlassesStore($glassesStore, $user);
+                case self::DELETE:
+                    return $this->canDeleteGlassesStore($glassesStore, $user);
+            }
+
+        } elseif ($subject instanceof Glasses) {
+            $glasses = $subject;
+
+            switch ($attribute) {
+                case self::VIEW:
+                    return $this->canView();
+                case self::EDIT:
+                    return $this->canEditGlasses($glasses, $user);
+                case self::NEW:
+                    return $this->canNewGlasses($glasses, $user);
+                case self::DELETE:
+                    return $this->canDeleteGlasses($glasses, $user);
+            }
         }
 
         throw new \LogicException('This code should not be reached!');
@@ -68,18 +83,33 @@ class OwnerVoter extends Voter
         return true;
     }
 
-    private function canEdit(GlassesStore $glassesStore, User $user): bool
+    private function canEditGlassesStore(GlassesStore $glassesStore, User $user): bool
     {
         return $glassesStore->getOwner() === $user;
     }
 
-    private function canNew(GlassesStore $glassesStore, User $user): bool
+    private function canNewGlassesStore(GlassesStore $glassesStore, User $user): bool
     {
         return $this->security->isGranted('ROLE_SELLER');
     }
 
-    private function canDelete(GlassesStore $glassesStore, User $user): bool
+    private function canDeleteGlassesStore(GlassesStore $glassesStore, User $user): bool
     {
         return $glassesStore->getOwner() === $user;
+    }
+
+    private function canEditGlasses(Glasses $glasses, User $user): bool
+    {
+        return $user->getGlassesStores()->contains($glasses->getGlassesStore());
+    }
+
+    private function canNewGlasses(Glasses $glasses, User $user): bool
+    {
+        return ($this->security->isGranted('ROLE_SELLER') and $user->getGlassesStores()->first());
+    }
+
+    private function canDeleteGlasses(Glasses $glasses, User $user): bool
+    {
+        return $user->getGlassesStores()->contains($glasses->getGlassesStore());
     }
 }

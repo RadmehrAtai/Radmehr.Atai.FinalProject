@@ -32,24 +32,25 @@ class GlassesStore implements TimeInterface, Translatable, UserInterface
     #[ORM\OneToMany(mappedBy: 'glassesStore', targetEntity: Glasses::class, orphanRemoval: true)]
     private Collection $glasses;
 
-    #[ORM\Column(length: 255), Assert\Regex(pattern: "/^[a-zA-Z]+$/"),
+    #[ORM\Column(length: 255), Assert\Regex(pattern: "/^[a-zA-Z|\s\-]+$/"),
         Assert\NotBlank(message: 'Please enter the name.')]
     #[Gedmo\Translatable]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255), Assert\Regex(pattern:"/^[a-zA-Z0-9|\s\-]+$/"),
+    #[ORM\Column(length: 255), Assert\Regex(pattern: "/^[a-zA-Z0-9|\s\-]+$/"),
         Assert\NotBlank(message: 'Please enter the address.')]
     #[Gedmo\Translatable]
     private ?string $address = null;
 
-    #[ORM\Column(length: 255), Assert\Regex(pattern:"/^[\d|\s]+$/"),
+    #[ORM\Column(length: 255), Assert\Regex(pattern: "/^[\d|\s]+$/"),
         Assert\NotBlank(message: 'Please enter the phone number.')]
     private ?string $phone = null;
 
     #[Gedmo\Locale]
     private $locale;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255), Assert\NotBlank(message: 'Please enter the image url.'),
+        Assert\Url(message: 'The {{ value }} is invalid.')]
     private ?string $imageUrl = null;
 
     public function __construct()

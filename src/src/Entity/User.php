@@ -37,7 +37,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $lastName = null;
 
-    #[ORM\OneToMany(mappedBy: 'storeOwner', targetEntity: GlassesStore::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: GlassesStore::class, orphanRemoval: true)]
     private Collection $glassesStores;
 
     #[ORM\OneToMany(mappedBy: 'buyer', targetEntity: Order::class)]

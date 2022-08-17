@@ -52,7 +52,7 @@ class Glasses implements UserInterface, TimeInterface, Translatable
     #[Gedmo\Translatable]
     private ?string $lenzMaterial = null;
 
-    #[ORM\Column(length: 255), Assert\Regex(pattern: "/^[a-zA-Z]+$/"),
+    #[ORM\Column(length: 255), Assert\Regex(pattern: "/^[a-zA-Z|\s\-]+$/"),
         Assert\NotBlank(message: 'Please enter the face form.')]
     #[Gedmo\Translatable]
     private ?string $faceForm = null;
@@ -79,7 +79,8 @@ class Glasses implements UserInterface, TimeInterface, Translatable
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: Order::class, orphanRemoval: true)]
     private Collection $orders;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255), Assert\NotBlank(message: 'Please enter the image url.'),
+        Assert\Url(message: 'The {{ value }} is invalid.')]
     private ?string $imageUrl = null;
 
     public function __construct()

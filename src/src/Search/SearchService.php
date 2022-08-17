@@ -16,6 +16,10 @@ class SearchService
 
     public function search($input)
     {
+        if (empty($input)) {
+            return null;
+        }
+
         $input = str_replace("%", "[%]", $input);
 
         $hotelRepository = $this->entityManager->getRepository(Glasses::class);
