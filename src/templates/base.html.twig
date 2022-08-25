@@ -27,17 +27,17 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('app_message_new') }}">{{ 'page.header.contactus'|trans }}</a>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        Language
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ path('app_home_index', {'_locale': 'en'}) }}">English</a>
-                        <a class="dropdown-item" href="{{ path('app_home_index', {'_locale': 'fa'}) }}">Farsi</a>
-                    </div>
-                </li>
             </ul>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ 'page.header.lang'|trans }}
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="{{ path('app_home_index', {'_locale': 'en'}) }}">{{ 'page.header.eng'|trans }}</a></li>
+                    <li><a class="dropdown-item" href="{{ path('app_home_index', {'_locale': 'fa'}) }}">{{ 'page.header.fa'|trans }}</a></li>
+                </ul>
+            </div>
             <div class="justify-content-center d-flex">
                 <form class="d-flex" method="get" action="{{ path('app_glasses_search') }}">
                     <input class="form-control me-2" name="query" type="text"
@@ -84,9 +84,9 @@
     <section class="border-bottom">
     </section>
 
-        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-            {{ 'page.footer.copyright'|trans }}
-        </div>
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+        {{ 'page.footer.copyright'|trans }}
+    </div>
 </footer>
 
 {% block javascripts %}

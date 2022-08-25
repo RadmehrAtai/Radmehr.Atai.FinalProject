@@ -6,6 +6,7 @@ use App\Entity\Order;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\NumberField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TelephoneField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
@@ -20,7 +21,8 @@ class OrderCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')->hideOnForm(),
-            TextField::new('status'),
+            TextField::new('status')->hideOnForm(),
+            NumberField::new('totalCost')->hideOnForm(),
             AssociationField::new('buyer'),
             AssociationField::new('product')
         ];

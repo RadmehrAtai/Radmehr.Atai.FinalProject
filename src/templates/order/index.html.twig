@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Orders{% endblock %}
+{% block title %}{{ 'page.orders.title'|trans }}{% endblock %}
 
 {% block body %}
     <h1>{{ 'app.order.title'|trans }}</h1>
@@ -18,6 +18,7 @@
         </thead>
         <tbody>
         {% for order in orders %}
+            {% if app.user is same as(order.buyer) %}
             <tr>
                 <td>{{ order.id }}</td>
                 <td>{{ order.status }}</td>
@@ -27,9 +28,12 @@
                 <td>
                     <a class="btn btn-primary" href="{{ path('app_order_show', {'id': order.id}) }}">
                         {{ 'app.order.show'|trans }}</a>
-                    {{ include('order/_delete_form.html.twig') }}
+                    {% if order.status is same as("Registered") %}
+                        {{ include('order/_delete_form.html.twig') }}
+                    {% endif %}
                 </td>
             </tr>
+            {% endif %}
         {% else %}
             <tr>
                 <td colspan="6">{{ 'app.order.not'|trans }}</td>

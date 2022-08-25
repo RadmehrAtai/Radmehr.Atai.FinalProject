@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}GlassesStore{% endblock %}
+{% block title %}{{ glasses_store.name }}{% endblock %}
 
 {% block body %}
     <h1 class="mt-5">{{ glasses_store.name }}</h1>
@@ -12,6 +12,12 @@
     <p class="h6 mb-5">
         {{ 'app.glassstore.address'|trans }}: {{ glasses_store.address }}
     </p>
+
+    {% if is_granted("ROLE_SELLER") %}
+        <a class="btn btn-warning" href="{{ path('app_glasses_store_edit', {'id': glasses_store.id}) }}">
+            {{ 'app.glassstore.edit'|trans }}</a>
+        {{ include('glasses_store/_delete_form.html.twig') }}
+    {% endif %}
 
     <h1 class="mt-5">{{ 'app.glassstore.ourglasses'|trans }}</h1>
     {% for glasses in glasses_store.glasses %}
@@ -26,13 +32,13 @@
                     {{ 'app.glassstore.showglasses'|trans }}</a>
             </div>
         </div>
+    {% else %}
+        <hr>
+        <div>
+            <h3 class="align-items-center">{{ 'app.glasses.not'|trans }}</h3>
+        </div>
     {% endfor %}
 
     <a class="btn btn-primary" href="{{ path('app_glasses_store_index') }}">{{ 'app.glassstore.back'|trans }}</a>
-    {% if is_granted("ROLE_SELLER") %}
-        <a class="btn btn-warning" href="{{ path('app_glasses_store_edit', {'id': glasses_store.id}) }}">
-            {{ 'app.glassstore.edit'|trans }}</a>
-        {{ include('glasses_store/_delete_form.html.twig') }}
-    {% endif %}
 
 {% endblock %}

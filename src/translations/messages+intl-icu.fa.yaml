@@ -9,15 +9,44 @@ page:
     login: 'ورود'
     logout: 'خروج'
     welcome: 'خوش آمدید'
+    lang: 'زبان'
+    eng: 'انگلیسی'
+    fa: 'فارسی'
 
   footer:
     copyright: '.تمامی حقوق محفوظ است'
 
   home:
-    title: 'به فروشگاه عینک من خوش آمدید'
+    title: 'خانه'
+    content: 'به فروشگاه عینک من خوش آمدید'
+
+  aboutus:
+    title: 'درباره ما'
+
+  contactus:
+    title: 'تماس با ما'
+
+  orders:
+    title: 'سفارشات'
+
+  register:
+    title: 'ثبت نام'
+
+  login:
+    title: 'ورود'
+
+  glasses:
+    title: 'عینک ها'
+    new: 'عینک جدید'
+    edit: 'ویرایش عینک'
+
+  glassstore:
+    title: 'عینک فروشی ها'
+    new: 'عینک فروشی جدید'
+    edit: 'ویرایش عینک فروشی'
 
   search:
-    value: 'جستجو ار طریق مدل یا برند'
+    value: 'جستجو از طریق مدل یا برند'
     button: 'جستجو'
 
 forms:
@@ -33,12 +62,12 @@ forms:
     lastname: 'نام خانوادگی'
     email: 'پست الکترونیکی'
     roles: 'نقش ها'
-    agree: 'موافقت با قوانین'
+    agree: 'با قوانین موافقم'
     password: 'رمز عبور'
     registeration: 'ثبت نام'
 
   glassstore:
-    name: 'نام'
+    name: 'نام فروشگاه'
     address: 'آدرس پستی'
     phone: 'شماره تلفن'
 
@@ -77,14 +106,14 @@ app:
     back: 'برگشت به لیست'
     newglasses: 'عینک جدید'
     create: 'عینک فروشی جدید'
-
+    send: 'ثبت'
 
   glasses:
     title: 'لیست عینک ها'
     id: 'آی دی'
     model: 'مدل'
     framematerial: 'جنس فریم'
-    frameform: 'فرم قریم'
+    frameform: 'فرم فریم'
     framecolor: 'رنک فریم'
     brand: 'برند'
     lenzmaterial: 'جنس لنز'
@@ -99,20 +128,22 @@ app:
     not: 'چیزی یافت نشد'
     back: 'برگشت به لیست'
     create: 'عینک جدید'
+    send: 'ثبت'
 
   message:
-    create: 'پیغام جدید'
+    create: 'تماس با ما'
+    send: 'ارسال'
 
   order:
-    title: 'لیست سفارشات'
+    title: 'سفارشات من'
     id: 'آی دی'
-    status: 'وضعیت'
+    status: 'وضعیت سفارش'
     cost: 'هزینه'
     product: 'محصول'
     createdat: 'ایحاد شده در'
     actions: 'عمل ها'
     show: 'مشاهده سفارش'
-    delete: 'حذف سفارش'
+    delete: 'لغو سفارش'
     not: 'چیزی یافت نشد'
     back: 'برکشت به لیست'
     create: 'سفارش'

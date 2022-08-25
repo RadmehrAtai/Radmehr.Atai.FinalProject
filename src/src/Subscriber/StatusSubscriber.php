@@ -4,6 +4,7 @@ namespace App\Subscriber;
 
 use App\Entity\Glasses;
 use App\Entity\Order;
+use App\Model\TimeInterface;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
@@ -15,6 +16,7 @@ class StatusSubscriber implements EventSubscriber
     {
         return [
             Events::prePersist,
+            Events::preRemove
         ];
     }
 
@@ -27,5 +29,16 @@ class StatusSubscriber implements EventSubscriber
         }
 
         $entity->setStatus("Registered");
+    }
+
+    public function preRemove(LifecycleEventArgs $args)
+    {
+        $entity = $args->getObject();
+
+        if (!$entity instanceof Order) {
+            return;
+        }
+
+        $entity->setStatus("Canceled");
     }
 }

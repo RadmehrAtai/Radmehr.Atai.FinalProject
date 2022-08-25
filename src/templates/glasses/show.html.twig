@@ -1,15 +1,18 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Glasses{% endblock %}
+{% block title %}{{ glass.brand }} {{ glass.model }}{% endblock %}
 
 {% block body %}
-    <h1>Glasses</h1>
-
+    <h1>{{ glass.brand }} {{ glass.model }}</h1>
     <table class="table">
         <tbody>
         <tr>
             <th>{{ 'app.glasses.id'|trans }}</th>
             <td>{{ glass.id }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'app.glasses.model'|trans }}</th>
+            <td>{{ glass.model }}</td>
         </tr>
         <tr>
             <th>{{ 'app.glasses.framematerial'|trans }}</th>

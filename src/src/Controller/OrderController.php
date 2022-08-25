@@ -6,6 +6,7 @@ use App\Entity\Glasses;
 use App\Entity\Order;
 use App\Entity\User;
 use App\Repository\OrderRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,6 +32,7 @@ class OrderController extends AbstractController
     }
 
     #[Route('/', name: 'app_order_index', methods: ['GET'])]
+    #[IsGranted('ROLE_BUYER')]
     public function index(OrderRepository $orderRepository): Response
     {
         return $this->render('order/index.html.twig', [

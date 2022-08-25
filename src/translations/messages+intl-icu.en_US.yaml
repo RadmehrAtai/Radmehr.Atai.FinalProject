@@ -9,12 +9,41 @@ page:
     login: Login
     logout: Logout
     welcome: Welcome!
+    lang: Language
+    eng: English
+    fa: Farsi
 
   footer:
     copyright: © COPYRIGHT 2022 MY GLASSES ®, INC. ALL RIGHTS RESERVED.
 
   home:
-    title: Welcome to My Glasses Shopping Centre
+    title: Home
+    content: Welcome to My Glasses Shopping Centre
+
+  aboutus:
+    title: About Us
+
+  contactus:
+    title: Contact Us
+
+  orders:
+    title: Orders
+
+  register:
+    title: Register
+
+  login:
+    title: Login
+
+  glasses:
+    title: Glasses
+    new: New Glasses
+    edit: Edit Glasses
+
+  glassstore:
+    title: Glasses Stores
+    new: New Glasses Store
+    edit: Edit Glasses Store
 
   search:
     value: Search by Brand or Model
@@ -79,6 +108,7 @@ app:
     back: Back to list
     newglasses: New Glasses
     create: New Glass Store
+    send: Register
 
 
   glasses:
@@ -103,10 +133,11 @@ app:
     create: New Glasses
 
   message:
-    create: New Message
+    create: Contact Us
+    send: Send
 
   order:
-    title: Orders List
+    title: My Orders
     id: Id
     status: Status
     cost: Cost
