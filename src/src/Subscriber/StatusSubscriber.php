@@ -34,11 +34,14 @@ class StatusSubscriber implements EventSubscriber
     public function preRemove(LifecycleEventArgs $args)
     {
         $entity = $args->getObject();
+        $em = $args->getObjectManager();
 
         if (!$entity instanceof Order) {
             return;
         }
 
         $entity->setStatus("Canceled");
+        $em->persist($entity);
+        $em->flush();
     }
 }

@@ -13,6 +13,7 @@
                 <th>{{ 'app.order.cost'|trans }}</th>
                 <th>{{ 'app.order.product'|trans }}</th>
                 <th>{{ 'app.order.createdat'|trans }}</th>
+                <th>{{ 'app.order.updatedat'|trans }}</th>
                 <th>{{ 'app.order.actions'|trans }}</th>
             </tr>
         </thead>
@@ -25,6 +26,11 @@
                 <td>{{ order.totalCost|format_currency('USD') }}</td>
                 <td>{{ order.product }}</td>
                 <td>{{ order.createdAt ? order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                {% if order.updatedAt is null %}
+                    <td> - </td>
+                {% else %}
+                    <td>{{ order.updatedAt ? order.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                {% endif %}
                 <td>
                     <a class="btn btn-primary" href="{{ path('app_order_show', {'id': order.id}) }}">
                         {{ 'app.order.show'|trans }}</a>

@@ -27,6 +27,10 @@
                 <th>{{ 'app.order.createdat'|trans }}</th>
                 <td>{{ order.createdAt ? order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
+            <tr>
+                <th>{{ 'app.order.updatedat'|trans }}</th>
+                <td>{{ order.updatedAt ? order.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
         </tbody>
     </table>
 

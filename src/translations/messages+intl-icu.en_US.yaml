@@ -143,6 +143,7 @@ app:
     cost: Cost
     product: Product
     createdat: Created At
+    updatedat: Canceled At
     actions: Actions
     show: Show Order
     delete: Cancel Order

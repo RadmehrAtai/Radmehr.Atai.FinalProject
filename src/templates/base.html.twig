@@ -34,15 +34,19 @@
                     {{ 'page.header.lang'|trans }}
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="{{ path('app_home_index', {'_locale': 'en'}) }}">{{ 'page.header.eng'|trans }}</a></li>
-                    <li><a class="dropdown-item" href="{{ path('app_home_index', {'_locale': 'fa'}) }}">{{ 'page.header.fa'|trans }}</a></li>
+                    <li><a class="dropdown-item"
+                           href="{{ path(app.request.get('_route'),app.request.get('_route_params')|merge({'_locale': 'en'})) }}">{{ 'page.header.eng'|trans }}</a>
+                    </li>
+                    <li><a class="dropdown-item"
+                           href="{{ path(app.request.get('_route'),app.request.get('_route_params')|merge({'_locale': 'fa'})) }}">{{ 'page.header.fa'|trans }}</a>
+                    </li>
                 </ul>
             </div>
             <div class="justify-content-center d-flex">
                 <form class="d-flex" method="get" action="{{ path('app_glasses_search') }}">
                     <input class="form-control me-2" name="query" type="text"
                            placeholder="{{ 'page.search.value'|trans }}"
-                           aria-label="Search">
+                           aria-label="Search" required>
                     <input class="btn btn-outline-success my-2 my-sm-0" value="{{ 'page.search.button'|trans }}"
                            type="submit">
                 </form>

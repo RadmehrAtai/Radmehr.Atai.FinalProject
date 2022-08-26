@@ -90,7 +90,7 @@ class Glasses implements UserInterface, TimeInterface, Translatable
 
     public function __toString(): string
     {
-        return "{$this->model}";
+        return "{$this->brand} {$this->model}";
     }
 
     public function getId(): ?int
